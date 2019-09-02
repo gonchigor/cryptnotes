@@ -27,3 +27,6 @@ class Note(models.Model):
     class Meta:
         verbose_name = 'заметка'
         verbose_name_plural = 'заметки'
+        constraints = [
+            models.UniqueConstraint(fields=['category', 'name'], name='unique_note')
+        ]
