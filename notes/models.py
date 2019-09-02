@@ -15,7 +15,7 @@ class Category(models.Model):
 
 
 class Note(models.Model):
-    category = models.ForeignKey(Category, models.PROTECT, related_query_name="category", related_name="category")
+    category = models.ForeignKey(Category, models.PROTECT, related_query_name="note", related_name="note")
     name = models.CharField("Наименование", max_length=50)
     header = models.CharField("Заголовок", max_length=100)
     text = models.TextField("Текст заметки")
