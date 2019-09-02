@@ -3,9 +3,9 @@
 {% block body_container %}
     <div class="col-2">
         <ul class="nav flex-column">
-            {% for object in object_list %}
+            {% for category in object_list %}
                 <li class="nav-item">
-                    <a href="" class="nav-link">{{ object.name }}</a>
+                    <a href="{% url 'notes:category-detail' category.pk %}" class="nav-link">{{ category.name }}</a>
                 </li>
             {% endfor %}
             <li class="nav-item">

@@ -1,10 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block body_container %}
+    <div class="row">
+        <div class="col-2">
+            <ul class="nav flex-column">
+                {% for category in object_list %}
+                    <li class="nav-item">
+                        {% if category == object %}
+                            {{ category.name }}
+                        {% else %}
+                            <a href="{% url 'notes:category-detail' category.pk %}"
+                               class="nav-link">{{ category.name }}</a>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+                <li class="nav-item">
+                    <a href="{% url 'notes:category-create' %}" class="btn btn-primary">
+                        <i class="fas fa-plus-circle"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-2">
+            <ul class="nav flex-column">
+                {% for note in object.note.all %}
+                    <li class="nav-item">
+
+                        <a href="" class="nav-link">{{ note.name }}</a>
+
+                    </li>
+                {% endfor %}
+                <li class="nav-item">
+                    <a href="" class="btn btn-primary">
+                        <i class="fas fa-plus-circle"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}

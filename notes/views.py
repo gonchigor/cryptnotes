@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView
+from django.views.generic.detail import DetailView
 from .models import Category, Note
 from .form import CategoryForm
 from django.urls import reverse_lazy
@@ -15,3 +16,12 @@ class CategoryCreateView(CreateView):
     model = Category
     form_class = CategoryForm
     success_url = reverse_lazy('notes:category-list')
+
+
+class CategoryDetailView(DetailView):
+    model = Category
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['object_list'] = Category.objects.all()
+        return context
