@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block body_container %}
+    <div class="col-2">
+        <ul class="nav flex-column">
+            {% for object in object_list %}
+                <li class="nav-item">
+                    <a href="" class="nav-link">{{ object.name }}</a>
+                </li>
+            {% endfor %}
+            <li class="nav-item">
+                <a href="" class="btn btn-primary"><i class="fas fa-plus-circle"></i></a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}
