@@ -4,6 +4,7 @@ from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from cryptography.fernet import Fernet
+from passlib.hash import pbkdf2_sha256
 
 # password_provided = "password" # This is input in the form of a string
 
@@ -36,3 +37,11 @@ def decrypt_message(message, password):
     f = Fernet(key)
     decrypted = f.decrypt(message_provided)
     return decrypted.decode()
+
+
+def password_hasher(password):
+    return pbkdf2_sha256.hash(password)
+
+
+def password_verify(password, hash):
+    return pbkdf2_sha256.verify(password, hash)
