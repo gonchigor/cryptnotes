@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block body_container %}
+    <div class="container">
+        <h1>Удалить заметку</h1>
+        <form method="post" action="">
+            {% csrf_token %}
+            {% block dimension_form %}
+                <p>Подтвердите удаление {{ object.name }}</p>
+            {% endblock %}
+            {% block buttons %}
+                <button type="submit" name="save" class="btn btn-danger">Удалить</button>
+                <a class="btn btn-secondary" href="{% url 'notes:note-detail' object.pk %}">Отмена</a>
+            {% endblock %}
+        </form>
+    </div>
+{% endblock %}

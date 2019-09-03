@@ -45,6 +45,7 @@
             <h2>{{ object.header }}</h2>
             {% if print %}
                 <p>{{ object.text }}</p>
+                <a href="{% url 'notes:note-delete' object.pk %}" class="btn btn-danger">Удалить</a>
             {% else %}
                 <form method="post">
                     {% csrf_token %}

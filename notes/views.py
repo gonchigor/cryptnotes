@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic.list import ListView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, DeleteView
 from django.views.generic.detail import DetailView
 from .models import Category, Note
 from .form import CategoryForm, NoteForm, PasswordForm
@@ -70,3 +70,10 @@ class NoteDetailView(DetailView):
         if self.request.method == 'POST' and password_verify(self.request.POST['password'], obj.password):
             obj.text = decrypt_message(obj.text, self.request.POST['password'])
         return obj
+
+
+class NoteDeleteView(DeleteView):
+    model = Note
+
+    def get_success_url(self):
+        return reverse_lazy('notes:category-detail', kwargs={'pk': self.object.category.pk})
