@@ -8,7 +8,7 @@
                 {% for category in object_list %}
                     <li class="nav-item">
                         {% if category == object.category %}
-                            {{ category.name }}
+                            <span class="nav-link font-weight-bold">{{ category.name }}</span>
                         {% else %}
                             <a href="{% url 'notes:category-detail' category.pk %}"
                                class="nav-link">{{ category.name }}</a>
@@ -27,7 +27,7 @@
                 {% for note in object.category.note.all %}
                     <li class="nav-item">
                         {% if object.pk == note.pk %}
-                            {{ note.name }}
+                            <span class="nav-link font-weight-bold">{{ note.name }}</span>
                         {% else %}
                             <a href="{% url 'notes:note-detail' note.pk %}" class="nav-link">{{ note.name }}</a>
                         {% endif %}

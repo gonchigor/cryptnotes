@@ -3,11 +3,11 @@
 {% block body_container %}
     <div class="row">
         <div class="col-2">
-            <ul class="nav flex-column">
+            <ul class="nav flex-column nav-pills">
                 {% for category in object_list %}
                     <li class="nav-item">
                         {% if category == object %}
-                            {{ category.name }}
+                            <span class="nav-link font-weight-bold">{{ category.name }}</span>
                         {% else %}
                             <a href="{% url 'notes:category-detail' category.pk %}"
                                class="nav-link">{{ category.name }}</a>
@@ -22,16 +22,14 @@
             </ul>
         </div>
         <div class="col-2">
-            <ul class="nav flex-column">
+            <ul class="nav flex-column nav-pills">
                 {% for note in object.note.all %}
                     <li class="nav-item">
-
                         <a href="{% url 'notes:note-detail' note.pk %}" class="nav-link">{{ note.name }}</a>
-
                     </li>
                 {% endfor %}
                 <li class="nav-item">
-                    <a href="{% url 'notes:note-create' object.pk%}" class="btn btn-primary">
+                    <a href="{% url 'notes:note-create' object.pk %}" class="btn btn-primary">
                         <i class="fas fa-plus-circle"></i>
                     </a>
                 </li>

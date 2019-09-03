@@ -3,9 +3,9 @@
 {% block body_container %}
     <h1>Новая заметка</h1>
     <form method="post">
-    {% csrf_token %}
-    {{ form|crispy }}
-    <button type="submit" class="btn btn-success">ОК</button>
-    <a href="{% url 'notes:category-detail' view.kwargs.pk%}" class="btn btn-success">Отмена</a>
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-success">ОК</button>
+        <a href="{% url 'notes:category-detail' view.kwargs.pk %}" class="btn btn-success">Отмена</a>
     </form>
 {% endblock %}
