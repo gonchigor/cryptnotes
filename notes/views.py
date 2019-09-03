@@ -3,10 +3,10 @@ from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView
 from django.views.generic.detail import DetailView
 from .models import Category, Note
-from .form import CategoryForm, NoteForm
+from .form import CategoryForm, NoteForm, PasswordForm
 from django.urls import reverse_lazy
 from django.http.response import HttpResponseRedirect
-from .crypto import encrypt_message, password_hasher
+from .crypto import encrypt_message, password_hasher, password_verify, decrypt_message
 # Create your views here.
 
 
@@ -48,3 +48,25 @@ class NoteCreateView(CreateView):
     def get_success_url(self):
         return reverse_lazy('notes:category-detail', kwargs={'pk': self.kwargs['pk']})
 
+
+class NoteDetailView(DetailView):
+    model = Note
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context['object_list'] = Category.objects.all()
+        context['form'] = PasswordForm()
+        context['print'] = self.request.method == 'POST' and password_verify(self.request.POST['password'],
+                                                                             self.object.password)
+        return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        context = self.get_context_data(object=self.object)
+        return self.render_to_response(context)
+
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset)
+        if self.request.method == 'POST' and password_verify(self.request.POST['password'], obj.password):
+            obj.text = decrypt_message(obj.text, self.request.POST['password'])
+        return obj

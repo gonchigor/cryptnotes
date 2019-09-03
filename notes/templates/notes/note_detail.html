@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block body_container %}
     <div class="row">
@@ -6,7 +7,7 @@
             <ul class="nav flex-column">
                 {% for category in object_list %}
                     <li class="nav-item">
-                        {% if category == object %}
+                        {% if category == object.category %}
                             {{ category.name }}
                         {% else %}
                             <a href="{% url 'notes:category-detail' category.pk %}"
@@ -23,19 +24,34 @@
         </div>
         <div class="col-2">
             <ul class="nav flex-column">
-                {% for note in object.note.all %}
+                {% for note in object.category.note.all %}
                     <li class="nav-item">
-
-                        <a href="{% url 'notes:note-detail' note.pk %}" class="nav-link">{{ note.name }}</a>
+                        {% if object.pk == note.pk %}
+                            {{ note.name }}
+                        {% else %}
+                            <a href="{% url 'notes:note-detail' note.pk %}" class="nav-link">{{ note.name }}</a>
+                        {% endif %}
 
                     </li>
                 {% endfor %}
                 <li class="nav-item">
-                    <a href="{% url 'notes:note-create' object.pk%}" class="btn btn-primary">
+                    <a href="{% url 'notes:note-create' object.pk %}" class="btn btn-primary">
                         <i class="fas fa-plus-circle"></i>
                     </a>
                 </li>
             </ul>
+        </div>
+        <div class="col">
+            <h2>{{ object.header }}</h2>
+            {% if print %}
+                <p>{{ object.text }}</p>
+            {% else %}
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <button type="submit" class="btn btn-primary">Расшифровать</button>
+                </form>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

@@ -27,3 +27,7 @@ class NoteForm(forms.ModelForm):
             'password': forms.PasswordInput,
             'category': forms.HiddenInput,
         }
+
+
+class PasswordForm(forms.Form):
+    password = forms.CharField(label="Пароль", widget=forms.PasswordInput)
