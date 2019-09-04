@@ -19,7 +19,7 @@ class Note(models.Model):
     name = models.CharField("Наименование", max_length=50)
     header = models.CharField("Заголовок", max_length=100)
     text = models.TextField("Текст заметки")
-    password = models.CharField("Пароль", max_length=250)
+    password = models.CharField("Пароль", max_length=250)  # Не учел важность unittests. Без этого поля можно обойтись.
 
     def __str__(self):
         return self.name
