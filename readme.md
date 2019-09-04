@@ -2,14 +2,14 @@ Install:
 
 Require python3, pip, git, venv on computer.
 
-1. Clone source code from GitHub. In destination directory run command
+1. Clone source code from GitHub. In destination directory run command:
    git clone https://github.com/gonchigor/cryptnotes.git
 2. Create virtual environment for project. Run command: python -m venv env
 3. Activate virtual environment. Run command: env\scripts\activate.
 4. Install python packages: pip install -r cryptnotes\requirements.txt
 5. Go to directory cryptnotes. Run command: cd cryptnotes
 
-If you want use new clean database:
+If you want to use new clean database:
 
 1. Delete file db.sqlite3 in cryptnotes directory.
 2. Run command from cryptnotes directory: python manage.py migrate
