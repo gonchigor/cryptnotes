@@ -28,5 +28,5 @@ class Note(models.Model):
         verbose_name = 'заметка'
         verbose_name_plural = 'заметки'
         constraints = [
-            models.UniqueConstraint(fields=['category', 'name'], name='unique_note')
+            models.UniqueConstraint(fields=['category', 'name'], name='unique_note'),
         ]

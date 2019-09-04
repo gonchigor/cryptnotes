@@ -1,14 +1,12 @@
 import base64
-import os
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from cryptography.fernet import Fernet
 from passlib.hash import pbkdf2_sha256
 
-# password_provided = "password" # This is input in the form of a string
 
-salt = b'salt_' # CHANGE THIS - recommend using a key from os.urandom(16), must be of type bytes
+salt = b'salt_'
 
 
 def get_key(password_provided):
@@ -43,5 +41,5 @@ def password_hasher(password):
     return pbkdf2_sha256.hash(password)
 
 
-def password_verify(password, hash):
-    return pbkdf2_sha256.verify(password, hash)
+def password_verify(password, hash_):
+    return pbkdf2_sha256.verify(password, hash_)
